@@ -60,6 +60,16 @@
         display: none;
     }
 
+    header .rel{
+        position: fixed;
+        width: 100%;
+    }
+
+    header .mob-btn{
+       opacity: 1;
+    }
+    
+
     .about .rel{
         padding: 10rem 0;
     }
@@ -219,11 +229,11 @@
         border: .5rem solid #fff;
         padding-left: 1.5rem;
         padding-right: 1.5rem;
+        padding-top: 1rem;
     }
 
     .contact .tit-wrap .tit-circle span{
         font-size: 3rem;
-        line-height: 3rem;
     }
 
     .contact .tit-wrap .tit-circle .circle-text{
@@ -267,6 +277,10 @@
     .contact .tit-wrap .tit-circle{
         border: .4rem solid #fff;
     }
+
+    .contact .contact-wrap .c-wrap:hover .txt::before{
+        height: 150%;
+    }
 }
 
 @media screen and (max-width:700px) {
@@ -303,9 +317,9 @@
 }
 
 @media screen and (max-width:580px) {
-    .hero .sub-title2,
-    .hero .frame-wrap .copyright{
-        display: none;
+
+    .hero .sub-title1 span{
+        letter-spacing: .1rem;
     }
 
     .content-right .number{

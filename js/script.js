@@ -1,75 +1,130 @@
 gsap.registerPlugin(ScrollTrigger)
 
-const circle = gsap.timeline({ repeat: -1, repeatDelay: 2 }) 
+const logo = document.querySelector('.logo a');
+const mobBtnLine = document.querySelectorAll('.mob-btn span')
+const topBtn = document.querySelector('.fixedTop')
 
-.to('.circle',0.5, {width:'9vw'})
-.to('.circle',0.5, {width:'20vw'})
+window.addEventListener('scroll', function () {
+  let scroll = window.scrollY;
+
+  if (scroll > 250) {
+    topBtn.classList.add('On')
+      logo.style.color = "#fff"
+      mobBtnLine.forEach(span => {
+        span.style.backgroundColor = "#fff";
+      });
+  }
+  else {
+    topBtn.classList.remove('On')
+    logo.style.color = "#000"
+    mobBtnLine.forEach(span => {
+      span.style.backgroundColor = "#000";
+    });
+  }
+});
+
+topBtn.addEventListener('click', (e) => {
+  e.preventDefault()
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  })
+})
+
+const header = document.querySelector('header')
+const mobBtn = document.querySelector('.mob-btn')
+
+mobBtn.addEventListener('click', () => {
+
+  let scroll = window.scrollY;
+  header.classList.toggle('allMenu-open')
+
+  if (scroll > 250) {
+  if (!header.classList.contains('allMenu-open')) {
+      logo.style.color = "#fff"
+      mobBtnLine.forEach(span => {
+        span.style.backgroundColor = "#fff";
+      });
+    }
+    else if(header.classList.contains('allMenu-open')){
+      logo.style.color = "#000"
+      mobBtnLine.forEach(span => {
+        span.style.backgroundColor = "#000";
+      });
+    }
+  }
+})
+
+const circle = gsap.timeline({ repeat: -1, repeatDelay: 2 })
+
+  .to('.circle', 0.5, { width: '9vw' })
+  .to('.circle', 0.5, { width: '20vw' })
 
 
 const scene1 = gsap.timeline({
-    // duration:.5
+  // duration:.5
 })
 
 ScrollTrigger.create({
-    animation:scene1,
-    trigger:".about", 
-    start:"top 20%",
-    end:"top 80%",
-    scrub:2
+  animation: scene1,
+  trigger: ".about",
+  start: "top 20%",
+  end: "top 80%",
+  scrub: 2
 })
 
 
-scene1.to('.skill-list > div li > *',{
-    opacity:1,
-    stagger:.2,
-    duration:.2
+scene1.to('.skill-list > div li > *', {
+  opacity: 1,
+  stagger: .2,
+  duration: .2
 })
 
-scene1.to('.pg-wrap .pg.pg1',{
-    width:'95%',
-    delay:-.5
+scene1.to('.pg-wrap .pg.pg1', {
+  width: '95%',
+  delay: -.5
 })
-scene1.to('.pg-wrap .pg.pg2',{
-    width:'90%',
-    delay:-.5
+scene1.to('.pg-wrap .pg.pg2', {
+  width: '90%',
+  delay: -.5
 })
-scene1.to('.pg-wrap .pg.pg3',{
-    width:'80%',
-    delay:-.5
+scene1.to('.pg-wrap .pg.pg3', {
+  width: '80%',
+  delay: -.5
 })
-scene1.to('.pg-wrap .pg.pg4',{
-    width:'80%',
-    delay:-.5
+scene1.to('.pg-wrap .pg.pg4', {
+  width: '80%',
+  delay: -.5
 })
-scene1.to('.pg-wrap .pg.pg5',{
-    width:'90%',
-    delay:-.5
+scene1.to('.pg-wrap .pg.pg5', {
+  width: '90%',
+  delay: -.5
 })
-scene1.to('.pg-wrap .pg.pg6',{
-    width:'90%',
-    delay:-.5
+scene1.to('.pg-wrap .pg.pg6', {
+  width: '90%',
+  delay: -.5
 })
 
 const swiper = new Swiper(".workSwiper", {
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-      renderBullet: function (index, className) {
-        return '<span class="' + className + '">' + (index + 1) + "</span>";
-      },
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+    renderBullet: function (index, className) {
+      return '<span class="' + className + '">' + (index + 1) + "</span>";
     },
-  });
+  },
+});
 
-  const scswiper = new Swiper(".scrollSwiper", {
-    direction: "vertical",
-    slidesPerView: "auto",
-    freeMode: true,
-    scrollbar: {
-      el: ".swiper-scrollbar",
-    },
-    mousewheel: true,
-  });
-  
+const scswiper = new Swiper(".scrollSwiper", {
+  direction: "vertical",
+  slidesPerView: "auto",
+  freeMode: true,
+  scrollbar: {
+    el: ".swiper-scrollbar",
+  },
+  mousewheel: true,
+});
+
 
 
 //work 리스트 grid 행마다 개수에 따라 line 정리
@@ -77,18 +132,18 @@ function applyLargeScreenLogic() {
   const ulElements = document.querySelectorAll(".work-list");
 
   ulElements.forEach((ul) => {
-      const workItems = ul.querySelectorAll(".work-item");
+    const workItems = ul.querySelectorAll(".work-item");
 
-      workItems.forEach((item, index) => {
-          if (index >= 3) {
-              const topLine = item.querySelector(".topLine-wrap");
-              if (topLine) topLine.style.opacity = "1";
-          }
-          if (index % 3 === 0) {
-              const leftLine = item.querySelector(".leftLine-wrap");
-              if (leftLine) leftLine.style.opacity = "1";
-          }
-      });
+    workItems.forEach((item, index) => {
+      if (index >= 3) {
+        const topLine = item.querySelector(".topLine-wrap");
+        if (topLine) topLine.style.opacity = "1";
+      }
+      if (index % 3 === 0) {
+        const leftLine = item.querySelector(".leftLine-wrap");
+        if (leftLine) leftLine.style.opacity = "1";
+      }
+    });
   });
 }
 
@@ -96,17 +151,17 @@ function applySmallScreenLogic() {
   const ulElements = document.querySelectorAll(".work-list");
 
   ulElements.forEach((ul) => {
-      const workItems = ul.querySelectorAll(".work-item");
+    const workItems = ul.querySelectorAll(".work-item");
 
-      workItems.forEach((item, index) => {
-          if (index >= 1) {
-              const topLine = item.querySelector(".topLine-wrap");
-              if (topLine) topLine.style.opacity = "1";
-          }
-          // 모두 적용
-          const leftLine = item.querySelector(".leftLine-wrap");
-          leftLine.style.opacity = "1";
-      });
+    workItems.forEach((item, index) => {
+      if (index >= 1) {
+        const topLine = item.querySelector(".topLine-wrap");
+        if (topLine) topLine.style.opacity = "1";
+      }
+      // 모두 적용
+      const leftLine = item.querySelector(".leftLine-wrap");
+      leftLine.style.opacity = "1";
+    });
   });
 }
 
@@ -114,24 +169,24 @@ function applyMediumScreenLogic() {
   const ulElements = document.querySelectorAll(".work-list");
 
   ulElements.forEach((ul) => {
-      const workItems = ul.querySelectorAll(".work-item");
+    const workItems = ul.querySelectorAll(".work-item");
 
-      workItems.forEach((item, index) => {
-          if (index >= 2) {
-              const topLine = item.querySelector(".topLine-wrap");
-              if (topLine) topLine.style.opacity = "1";
-          }
-          if (index % 2 === 0) {
-              const leftLine = item.querySelector(".leftLine-wrap");
-              if (leftLine) leftLine.style.opacity = "1";
-          }
-      });
+    workItems.forEach((item, index) => {
+      if (index >= 2) {
+        const topLine = item.querySelector(".topLine-wrap");
+        if (topLine) topLine.style.opacity = "1";
+      }
+      if (index % 2 === 0) {
+        const leftLine = item.querySelector(".leftLine-wrap");
+        if (leftLine) leftLine.style.opacity = "1";
+      }
+    });
   });
 }
 
 function resetAllLines() {
   document.querySelectorAll(".topLine-wrap, .leftLine-wrap").forEach((el) => {
-      el.style.opacity = "0";
+    el.style.opacity = "0";
   });
 }
 
@@ -140,15 +195,15 @@ document.addEventListener("DOMContentLoaded", function () {
   const mqSmall = window.matchMedia("(max-width: 1040px)");
 
   function handleScreenChange() {
-      resetAllLines();
+    resetAllLines();
 
-      if (mqSmall.matches) {
-          applySmallScreenLogic();
-      } else if (mqMedium.matches) {
-          applyMediumScreenLogic();
-      } else {
-          applyLargeScreenLogic();
-      }
+    if (mqSmall.matches) {
+      applySmallScreenLogic();
+    } else if (mqMedium.matches) {
+      applyMediumScreenLogic();
+    } else {
+      applyLargeScreenLogic();
+    }
   }
 
   mqSmall.addEventListener("change", handleScreenChange);
@@ -234,11 +289,11 @@ function getAccurateWidth(text) {
 
   // 고정 너비 여유를 추가해서 최종 너비 계산
   const textWidth = measurer.offsetWidth + paddingX + borderX;
-  
-  const fontSize = parseFloat(textStyles.fontSize); // px 단위
-  const extra = fontSize * 1.5;
 
-  return textWidth+extra; // 추가 여유를 더한 최종 너비
+  const fontSize = parseFloat(textStyles.fontSize); // px 단위
+  const extra = fontSize * 1.75;
+
+  return textWidth + extra; // 추가 여유를 더한 최종 너비
 }
 
 function getHashOnlyWidth() {
@@ -281,7 +336,7 @@ function animateTextChange() {
 
       gsap.to(titCircle, {
         duration: 0.8,
-        delay:0.5,
+        delay: 0.5,
         width: targetWidth,
         ease: "power1.inOut"
       });
